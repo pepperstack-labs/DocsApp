@@ -1,6 +1,6 @@
 # Careline · Doctor appointment management
 
-A local development app built with **TanStack Start + React**, a separate **Fastify** API, and **local Supabase (PostgreSQL)**. Book 30-minute appointments, search patients, filter by date/doctor/status, and complete or cancel visits. All schedule times are **UTC**.
+A Turborepo monorepo built with **TanStack Start + React**, a separate **Fastify** API, and **local Supabase (PostgreSQL)**. Book 30-minute appointments, search patients, filter by date/doctor/status, and complete or cancel visits. All schedule times are **UTC**.
 
 ## Run locally
 
@@ -51,6 +51,14 @@ npm run test:e2e
 Playwright uses `/usr/bin/chromium` by default. On another system install Chromium or run `npx playwright install chromium` and set `CHROMIUM_PATH` to that executable. Browser tests start the app automatically if port 3000 is free. They exercise the real API/database, use fictional test patients, and leave their test visits cancelled. The database integration test creates and removes an isolated doctor and appointments.
 
 Unit tests exercise validation and safe error responses with a test-only store. Database tests use actual local Supabase and prove persistence through a separate connection, concurrent conflict prevention, adjacent appointments, cancellation and rebooking. Browser coverage includes booking, reload persistence, conflicts, filters, completion/cancellation, keyboard focus, mobile layout and error recovery.
+
+## Turborepo workspace
+
+npm workspaces contain the independently runnable API and web apps. Root `npm run dev` uses Turbo to start both persistent development tasks; `npm run build`, `npm run typecheck` and `npm test` use Turbo task caching. Build artifacts are cached from each app's `dist/`. Shared TypeScript configuration and the optional root `.env` are tracked as global inputs; relevant shell environment variables are declared in `turbo.json`.
+
+Database integration tests (`npm run test:db`) always execute without caching because they depend on live database state. Supabase lifecycle commands and cross-app Playwright tests stay at the root. Turbo's local cache is ignored by Git; no remote cache account is required.
+
+Run an individual package task with `npx turbo run build --filter=@docsapp/web` or `npm run dev -w @docsapp/api`. The same root commands run in CI.
 
 ## Layout and API
 
