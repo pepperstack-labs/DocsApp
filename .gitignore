@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+.output/
+.tanstack/
+.vite/
+playwright-report/
+test-results/
+.turbo/
