@@ -1,9 +1,5 @@
 node_modules
 package-lock.json
-**/dist
-**/.tanstack
-**/routeTree.gen.ts
-supabase/.temp
-playwright-report
-test-results
-**/.turbo
+.next
+out
+next-env.d.ts
