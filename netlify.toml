@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  # `output: 'export'` in next.config.ts writes the static site to `out/`.
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"
