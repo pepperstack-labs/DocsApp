@@ -1,0 +1,16 @@
+---
+title: Static by default
+date: 2026-10-28
+description: Building the whole blog ahead of time keeps it fast and simple.
+---
+
+Running `npm run build` turns every post into a static HTML file in `out/`.
+You can host that folder on any static file server or CDN.
+
+## Adding a post
+
+1. Create `content/posts/my-new-post.mdx`.
+2. Add a `title` and `date` to its frontmatter.
+3. Rebuild the site.
+
+The index page always lists the newest post first.
